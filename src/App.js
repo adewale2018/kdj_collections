@@ -1,13 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { auth, createUserProfileDocument } from "./firebase/firebase.config";
+import { setCurrentUser } from "./redux/user/user.actions";
 import MainNav from "./components/MainNav";
 import Routes from "./Routes";
 import Footer from "./pages/Footer";
-
 
 class App extends Component {
   state = {
     collapseID: "",
   };
+
+  onSubscribeFromAuth = null;
 
   toggleCollapse = (collapseID) => () =>
     this.setState((prevState) => ({
@@ -20,7 +25,29 @@ class App extends Component {
     collapseID === collID && this.setState({ collapseID: "" });
   };
 
+  componentDidMount() {
+    const { setCurrentUser } = this.props;
+    this.onSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
+          });
+        });
+      } else {
+        setCurrentUser(userAuth);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.onSubscribeFromAuth();
+  }
+
   render() {
+    const { currentUser } = this.props;
     const overlay = (
       <div
         id='sidenav-overlay'
@@ -40,7 +67,7 @@ class App extends Component {
         />
         {collapseID && overlay}
         <main>
-          <Routes />
+          <Routes currentUser={currentUser} />
         </main>
         <Footer />
       </div>
@@ -48,4 +75,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

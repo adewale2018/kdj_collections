@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import NavigationNavPage from "./pages/NavigationNavPage";
 import FormsNavPage from "./pages/FormsNavPage";
@@ -14,7 +14,7 @@ import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Cart from "./pages/Cart";
+import Cart from "./pages/CartIcon";
 // FREE
 import AnimationPage from "./pages/AnimationPage";
 import AlertPage from "./pages/AlertPage";
@@ -71,10 +71,20 @@ import RatingPage from "./pages/RatingPage";
 
 class Routes extends React.Component {
   render() {
+    const { currentUser } = this.props;
     return (
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/doc' component={HomePage} />
+        <Route exact path='/contact' component={Contact} />
+        <Route exact path='/shop' component={Shop} />
+        <Route
+          exact
+          path='/login'
+          render={() => (currentUser ? <Redirect to='/' /> : <SignIn />)}
+        />
+        <Route exact path='/signup' component={SignUp} />
+
         <Route exact path='/addons' component={AddonsNavPage} />
         <Route exact path='/advanced' component={AdvancedNavPage} />
         <Route exact path='/components' component={ComponentsNavPage} />
@@ -83,12 +93,6 @@ class Routes extends React.Component {
         <Route exact path='/modals' component={ModalsNavPage} />
         <Route exact path='/navigation' component={NavigationNavPage} />
         <Route exact path='/tables' component={TablesNavPage} />
-
-        <Route exact path='/about' component={About} />
-        <Route exact path='/contact' component={Contact} />
-        <Route exact path='/shop' component={Shop} />
-        <Route exact path='/login' component={SignIn} />
-        <Route exact path='/signup' component={SignUp} />
 
         {/* FREE */}
         <Route path='/addons/iframe' component={IframePage} />
