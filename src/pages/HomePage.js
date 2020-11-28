@@ -1,20 +1,22 @@
-import React from 'react';
+import './HomePage.css';
+
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBCardBody,
-  MDBIcon,
+  MDBAnimation,
   MDBCard,
-  MDBCardTitle,
+  MDBCardBody,
   MDBCardImage,
   MDBCardText,
-  MDBAnimation,
-  MDBNavLink
+  MDBCardTitle,
+  MDBCol,
+  MDBContainer,
+  MDBEdgeHeader,
+  MDBFreeBird,
+  MDBIcon,
+  MDBNavLink,
+  MDBRow
 } from 'mdbreact';
-import './HomePage.css';
+
+import React from 'react';
 
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
@@ -22,7 +24,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <>
-        <MDBEdgeHeader color='indigo darken-3' className='sectionPage' />
+        <MDBEdgeHeader color='indigo darken-2' className='sectionPage' />
         <div className='mt-3 mb-5'>
           <MDBFreeBird>
             <MDBRow>

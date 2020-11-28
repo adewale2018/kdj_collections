@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Texturina:wght@300;400&display=swap');
 body {
 	background:#fff;
 }
@@ -32,8 +33,30 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
   height: 100%;
   width: 100%;
   position: absolute;
-  background: url('https://mdbootstrap.com/wp-content/uploads/2016/12/big-bundle1.jpg');
+  background: url('https://i.postimg.cc/qq5HQgs8/16.jpg');
   background-position: center center;
   background-size: cover;
-  filter: opacity(.1);
+  filter: opacity(.5) !important;
+  /* margin-bottom: 2rem; */
+}
+.store-title {
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.8rem;
+  word-spacing: 4px;
+}
+.store-title-1 {
+  color: #fff;
+  font-weight: 500;
+  margin: 5px 0 5px 0 !important;
+  font-family: 'Texturina', serif;
+}
+.special-card {
+  margin: 0 5px 0 5px !important;
+  height: 300px;
+}
+.shopLink {
+  background-color: #ff7043;
+  margin-top: 2rem;
 }

@@ -1,37 +1,25 @@
-import React from "react";
-import { connect } from "react-redux";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import './MainNavBar.css'
 
 import {
+  MDBBtn,
+  MDBCollapse,
+  MDBIcon,
+  MDBNavItem,
+  MDBNavLink,
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavbarToggler,
-  MDBCollapse,
-  MDBNavItem,
-  MDBNavLink,
   MDBTooltip,
-  MDBIcon,
-  MDBBtn,
 } from "mdbreact";
 
 import MyLogo from "../assets/a3.PNG";
+import React from "react";
 import { auth } from "../firebase/firebase.config";
-
-const MySwal = withReactContent(Swal);
-
-MySwal.fire({
-  title: <p>Hello World</p>,
-  footer: "Copyright 2018",
-  didOpen: () => {
-    // `MySwal` is a subclass of `Swal`
-    //   with all the same instance & static methods
-    MySwal.clickConfirm();
-  },
-});
+import { connect } from "react-redux";
 
 function MainNav({ collapseID, toggleCollapse, closeCollapse, currentUser }) {
+  
   return (
     <MDBNavbar color='purple-gradient' dark expand='md' fixed='top' scrolling>
       <MDBNavbarBrand href='/' className='py-0 font-weight-bold'>
@@ -45,7 +33,7 @@ function MainNav({ collapseID, toggleCollapse, closeCollapse, currentUser }) {
             border: "2px solid #000",
           }}
         />
-        <strong className='align-middle'>KDJ COLLECTIONS</strong>
+        <strong className='align-middle title-brand'>FLOWER <span className='title-girl'>GIRL</span></strong>
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={toggleCollapse("mainNavbarCollapse")} />
       <MDBCollapse id='mainNavbarCollapse' isOpen={collapseID} navbar>
@@ -107,6 +95,7 @@ function MainNav({ collapseID, toggleCollapse, closeCollapse, currentUser }) {
             <MDBIcon className='shopping-icon' icon='shopping-bag' />
             <span className='item-count'>00</span>
           </span>
+          {currentUser ? <span className='text-white font-size-sm mt-2'>Hi, {currentUser.email} </span>: ""}
         </MDBNavbarNav>
       </MDBCollapse>
     </MDBNavbar>

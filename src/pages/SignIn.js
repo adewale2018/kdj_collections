@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import {
-  MDBEdgeHeader,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBJumbotron,
   MDBAnimation,
   MDBBtn,
+  MDBCol,
+  MDBContainer,
+  MDBEdgeHeader,
   MDBIcon,
+  MDBJumbotron,
+  MDBRow,
 } from "mdbreact";
+import React, { useState } from "react";
+import { SignInWithGoogle, auth } from "../firebase/firebase.config";
 
-import { auth, SignInWithGoogle } from "../firebase/firebase.config";
+import { Link } from "react-router-dom";
 import SectionContainer from "../components/sectionContainer";
+import { connect } from "react-redux";
 import { setCurrentUser } from "../redux/user/user.actions";
 
 function SignIn() {
@@ -30,7 +30,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = state;
-    console.log(email, password)
+    
     try {
       await auth.signInWithEmailAndPassword(email, password);
       setState({
@@ -38,7 +38,7 @@ function SignIn() {
         password: "",
       });
     } catch (error) {
-      console.log('Error occurred signing in...')
+      
     }
   };
 
